@@ -1,0 +1,29 @@
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+
+@app.route("/", methods=["GET", "POST"])
+def index():
+    if request.method == "POST":
+        user_input = request.form.get("user_input")
+        return f"You entered: {user_input}"
+    return '''
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>AplikacjaFormularz</title>
+    </head>
+    <body>
+        <form method="post">
+            <label for="user_input">Podaj dane:</label>
+            <input type="text" id="user_input" name="user_input" required>
+            <button type="submit">Zatwierdz</button>
+        </form>
+    </body>
+    </html>
+    '''
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
